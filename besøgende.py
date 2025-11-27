@@ -32,15 +32,16 @@ processed_data.sort(key=lambda x: x[0])
 months = [item[0] for item in processed_data]
 visitors = [item[1] for item in processed_data]
 
+plt.style.use('seaborn-v0_8-darkgrid')
 plt.figure(figsize=(10, 6))
 
-plt.plot(months, visitors, linestyle='-', marker='o')
+plt.plot(months, visitors, linestyle='--', marker='s')
 
 plt.title('Besøgende over tid')
 plt.xlabel('Date')
 plt.ylabel('Visitors')
 
-plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%d %b %Y'))
+plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
 plt.gcf().autofmt_xdate() # Auto-rotate dates
 
 plt.show()
