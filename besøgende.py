@@ -15,7 +15,6 @@ data = cursor.fetchall()
 connection.close()
 processed_data = []
 
-
 for row in data:
     date_string = row[0]
     
@@ -28,10 +27,7 @@ for row in data:
 
         processed_data.append((date_obj, visitor_count))
 
-
 processed_data.sort(key=lambda x: x[0])
-
-
 
 months = [item[0] for item in processed_data]
 visitors = [item[1] for item in processed_data]
