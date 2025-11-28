@@ -38,17 +38,23 @@ processed_data.sort(key=lambda x: x[0])
 months = [item[0] for item in processed_data]
 #Definere hvad data der er besøgende
 visitors = [item[1] for item in processed_data]
-
+#Tema for matplot
 plt.style.use('seaborn-v0_8-darkgrid')
-#plt.figure(figsize=(10, 10))
-
+#Størrelse på matplot
+plt.figure(figsize=(10, 6))
+#Ligger data i matplot
 plt.plot(months, visitors, linestyle='--', marker='s')
 
+#Title
 plt.title('Besøgende over tid')
+#Data i x-axe
 plt.xlabel('Date')
+#Data i y-axe
 plt.ylabel('Visitors')
 
+#Sætter dato format i x axen i grafen
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
-plt.gcf().autofmt_xdate() # Auto-rotate dates
+plt.gcf().autofmt_xdate()
 
+#viser graf
 plt.show()
