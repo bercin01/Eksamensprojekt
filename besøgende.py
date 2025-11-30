@@ -43,7 +43,7 @@ plt.style.use('seaborn-v0_8-darkgrid')
 #Størrelse på matplot
 plt.figure(figsize=(10, 6))
 #Ligger data i matplot
-plt.plot(months, visitors, linestyle='--', marker='s')
+plt.plot(months, visitors, marker='s')
 
 #Title
 plt.title('Besøgende over tid')
@@ -56,5 +56,7 @@ plt.ylabel('Visitors')
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%b %Y'))
 plt.gcf().autofmt_xdate()
 
-#viser graf
+#Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
+plt.tight_layout()
+#Kalder grafen
 plt.show()
