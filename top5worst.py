@@ -28,10 +28,10 @@ fig, ax = plt.subplots(figsize=(10, 6))
 #Da produkterne giver en negativ værdi inverter denne syntax grafen således at den vises rigtgit og ikke med 0 i toppen
 ax.invert_yaxis()
 #Laver selve bar grafen første option er X axen og den anden er Y axen efterfulgt at farvekode.
-bars = ax.bar(product_titles, net_revenues, color='#1f77b4')
+bars = ax.bar(product_titles, net_revenues, color='#b40c1c')
 
 #Sætter titel på grafen samt titel på Y axen
-ax.set_title('Top 5 Mest Populære Produkter i 2025 (Nettoomsætning)', fontsize=14, pad=15)
+ax.set_title('Top 5 Mindst Populære Produkter i 2025 (Nettoomsætning)', fontsize=14, pad=15)
 ax.set_ylabel('Total Nettoomsætning (DKK)', fontsize=12)
 #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
 plt.xticks(rotation=25, ha='right', fontsize=8)
