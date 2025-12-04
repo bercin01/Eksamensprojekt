@@ -97,7 +97,7 @@ def dashboard_button():
 
 # Løgbutikkens logo
 image = PhotoImage(file="loegbutikken-logo.png")
-image_label = c.CTkLabel(window, image=image)
+image_label = c.CTkLabel(window, image=image, text="") # Vi har et tomt tekstfelt, da der ellers vil stå CTk.Label midt i billedet
 image_label.pack(pady=10)
 
 # Overskriften (Vi bruger pady her, da det er det nemmeste, fordi vi har skal have en simpel forside, og ikke så meget struktur)
