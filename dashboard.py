@@ -47,7 +47,7 @@ def dashboard_button():
         marketing_window.grid_columnconfigure(2, weight=1)
 
         # Markedsførings overskriften
-        marketing_title = c.CTkLabel(marketing_window, text="Markedsføring Dashboard", font=("Arial", 32, "bold"), text_color="#4a7c59")
+        marketing_title = c.CTkLabel(marketing_window, text="Markedsføring Dashboard", font=("Times new roman", 32, "bold"), text_color="#4a7c59")
         marketing_title.grid(row=0, column=0, columnspan=3, pady=20, sticky="n")
 
         # 3 vinduer til graferne
@@ -66,7 +66,7 @@ def dashboard_button():
         c.CTkLabel(marketing_graf3, text="Klaviyo").pack(pady=10)
 
         # Overskrift 
-    title = c.CTkLabel(dashboard_window, text="Performance Dashboard", font=("Arial", 32, "bold"), text_color="#4a7c59")
+    title = c.CTkLabel(dashboard_window, text="Performance Dashboard", font=("Times new roman", 32, "bold"), text_color="#4a7c59")
     title.grid(row=0, column=0, columnspan=2 ,pady=20, sticky="n")
 
         # Vores 4 vinduer til graferne
@@ -89,7 +89,7 @@ def dashboard_button():
     c.CTkLabel(graf4, text="Mindst populære produkter").pack(pady=10)
 
         # Knap til at se markedsføring
-    marketing_button = c.CTkButton(dashboard_window, text="Se markedsføring", font=("Arial", 15), command=marketing_button, fg_color="#ff66c4", text_color="black", hover_color="#54ac80") # Laver knappen
+    marketing_button = c.CTkButton(dashboard_window, text="Se markedsføring", font=("Times new roman", 15), command=marketing_button, fg_color="#ff66c4", text_color="black", hover_color="#54ac80") # Laver knappen
     marketing_button.grid(row=0, column=2, columnspan=2, padx= 30, pady=20) # Placerer den op i Højre hjørne
 
 
@@ -101,14 +101,16 @@ image_label = c.CTkLabel(window, image=image, text="") # Vi har et tomt tekstfel
 image_label.pack(pady=10)
 
 # Overskriften (Vi bruger pady her, da det er det nemmeste, fordi vi har skal have en simpel forside, og ikke så meget struktur)
-label = c.CTkLabel(window, text="Velkommen til Løgbutikkens Dashboard \n Arbejder du hos Løgbutikken?", font=("Arial", 32, "bold"), text_color="#4a7c59")
+label = c.CTkLabel(window, text="Velkommen til Løgbutikkens Dashboard \n Arbejder du hos Løgbutikken?", font=("Times new roman", 32, "bold"), text_color="#4a7c59")
 label.pack(pady=20)
 
 # Ja knappen
-ja_knap = c.CTkButton(window, text = "Ja", font = ("Arial", 15, "bold"), command=dashboard_button, fg_color="#ff66c4", text_color="black", hover_color="#54ac80")
+ja_knap = c.CTkButton(window, text = "Ja", font = ("Times new roman", 18, "bold"), command=dashboard_button, fg_color="#ff66c4", text_color="black", hover_color="#54ac80")
 ja_knap.pack(pady=20)
 
 # Nej knappen
-nej_knap = c.CTkButton(window, text="Nej", font = ("Arial", 15, "bold"), command=exit, fg_color="#ff66c4", text_color="black", hover_color="#54ac80")
+nej_knap = c.CTkButton(window, text="Nej", font = ("Times new roman", 18, "bold"), command=exit, fg_color="#ff66c4", text_color="black", hover_color="#54ac80")
 nej_knap.pack(pady=2)
+
+
 window.mainloop()

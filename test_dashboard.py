@@ -532,7 +532,7 @@ graf4.grid_columnconfigure(0, weight=1)
 canvas_widget4.grid(row=0, column=0, sticky=NSEW)
 
 # Knap til at se markedsføring
-marketing_button = c.CTkButton(window, text="Se markedsføring", font=("Arial", 15), command=marketing_button, fg_color="#ff66c4", text_color="black", hover_color="#54ac80") # Laver knappen
+marketing_button = c.CTkButton(window, text="Se markedsføring", font=("Times New Roman", 15), command=marketing_button, fg_color="#ff66c4", text_color="black", hover_color="#54ac80") # Laver knappen
 marketing_button.grid(row=0, column=2, padx= 30, pady=20, sticky="e") # Placerer den op i Højre hjørne, ændret til column 2
 
 window.mainloop()
