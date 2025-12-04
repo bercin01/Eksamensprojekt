@@ -110,5 +110,5 @@ ja_knap.pack(pady=20)
 
 # Nej knappen
 nej_knap = c.CTkButton(window, text="Nej", font = ("Arial", 15, "bold"), command=exit, fg_color="#ff66c4", text_color="black", hover_color="#54ac80")
-nej_knap.pack(pady=10)
+nej_knap.pack(pady=2)
 window.mainloop()
