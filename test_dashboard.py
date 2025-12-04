@@ -10,6 +10,201 @@ import customtkinter as c
 # DB file
 DB_FILE = 'database.db'
 
+def create_facebook_graph_cr():
+    QUERY = """
+    SELECT 
+        CASE
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 1 AND 3 THEN 'Q1'
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 4 AND 6 THEN 'Q2'
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 7 AND 9 THEN 'Q3'
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 10 AND 12 THEN 'Q4'
+        END AS Quarter,
+        CAST(SUM(purchase_complete) AS REAL) * 100 / SUM(Sessioner) AS Konverteringsrate_Pct
+        FROM 
+            Marketing
+        WHERE
+            substr(Dato, 7, 2) = '25' AND "Henvisende kanal" = 'facebook'
+        GROUP BY
+            Quarter
+        ORDER BY
+            Quarter;
+    """
+
+    #SQL forbindelse
+    connection = sqlite3.connect(DB_FILE)
+    cursor = connection.cursor()
+
+    #Kører query og lægge output i variablen data
+    cursor.execute(QUERY)
+    data = cursor.fetchall()
+    connection.close()
+
+    #Trækker data ud af data og lægger det i 2 lister en for produkter og en for omsætning for produktet
+    quarter = [row[0] for row in data]
+    conversion_rate = [row[1] for row in data]
+
+    plt.style.use('seaborn-v0_8-darkgrid')
+
+    #Sætter størrelse for graf
+    fig, ax = plt.subplots(figsize=(6, 4))
+
+    #Laver selve bar grafen første option er X axen og den anden er Y axen efterfulgt at farvekode.
+    bars = ax.bar(quarter, conversion_rate, color='#364625')
+
+    ax.bar_label(
+        bars,
+        fmt='%.2f%%',
+        padding=3
+    )
+
+    #Sætter titel på grafen samt titel på Y axen
+    ax.set_title('Konvateringsrate Facebook 2025', fontsize=14, pad=15)
+    #ax.set_ylabel('Konvateringsrate i %', fontsize=12)
+
+    formatter = ticker.ScalarFormatter(useMathText=True)
+
+    formatter.set_scientific(False)
+
+    ax.yaxis.set_major_formatter(formatter)
+
+    #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
+    plt.xticks(rotation=25, ha='right', fontsize=8)
+    #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
+
+    fig.tight_layout()
+    
+    return fig
+
+def create_google_graph_cr():
+    QUERY = """
+    SELECT 
+        CASE
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 1 AND 3 THEN 'Q1'
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 4 AND 6 THEN 'Q2'
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 7 AND 9 THEN 'Q3'
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 10 AND 12 THEN 'Q4'
+        END AS Quarter,
+        CAST(SUM(purchase_complete) AS REAL) * 100 / SUM(Sessioner) AS Konverteringsrate_Pct
+        FROM 
+            Marketing
+        WHERE
+            substr(Dato, 7, 2) = '25' AND "Henvisende kanal" = 'google'
+        GROUP BY
+            Quarter
+        ORDER BY
+            Quarter;
+    """
+
+    #SQL forbindelse
+    connection = sqlite3.connect(DB_FILE)
+    cursor = connection.cursor()
+
+    #Kører query og lægge output i variablen data
+    cursor.execute(QUERY)
+    data = cursor.fetchall()
+    connection.close()
+
+    #Trækker data ud af data og lægger det i 2 lister en for produkter og en for omsætning for produktet
+    quarter = [row[0] for row in data]
+    conversion_rate = [row[1] for row in data]
+
+    plt.style.use('seaborn-v0_8-darkgrid')
+
+    #Sætter størrelse for graf
+    fig, ax = plt.subplots(figsize=(6, 4))
+
+    #Laver selve bar grafen første option er X axen og den anden er Y axen efterfulgt at farvekode.
+    bars = ax.bar(quarter, conversion_rate, color='#364625')
+
+    ax.bar_label(
+        bars,
+        fmt='%.2f%%',
+        padding=3
+    )
+
+    #Sætter titel på grafen samt titel på Y axen
+    ax.set_title('Konvateringsrate Google 2025', fontsize=14, pad=15)
+    #ax.set_ylabel('Konvateringsrate i %', fontsize=12)
+
+    formatter = ticker.ScalarFormatter(useMathText=True)
+
+    formatter.set_scientific(False)
+
+    ax.yaxis.set_major_formatter(formatter)
+
+    #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
+    plt.xticks(rotation=25, ha='right', fontsize=8)
+    #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
+
+    fig.tight_layout()
+    
+    return fig
+
+def create_klaviyo_graph_cr():
+    QUERY = """
+    SELECT 
+        CASE
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 1 AND 3 THEN 'Q1'
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 4 AND 6 THEN 'Q2'
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 7 AND 9 THEN 'Q3'
+            WHEN CAST(substr(Dato, 1, 2) AS INTEGER) BETWEEN 10 AND 12 THEN 'Q4'
+        END AS Quarter,
+        CAST(SUM(purchase_complete) AS REAL) * 100 / SUM(Sessioner) AS Konverteringsrate_Pct
+        FROM 
+            Marketing
+        WHERE
+            substr(Dato, 7, 2) = '25' AND "Henvisende kanal" = 'klaviyo'
+        GROUP BY
+            Quarter
+        ORDER BY
+            Quarter;
+    """
+
+    #SQL forbindelse
+    connection = sqlite3.connect(DB_FILE)
+    cursor = connection.cursor()
+
+    #Kører query og lægge output i variablen data
+    cursor.execute(QUERY)
+    data = cursor.fetchall()
+    connection.close()
+
+    #Trækker data ud af data og lægger det i 2 lister en for produkter og en for omsætning for produktet
+    quarter = [row[0] for row in data]
+    conversion_rate = [row[1] for row in data]
+
+    plt.style.use('seaborn-v0_8-darkgrid')
+
+    #Sætter størrelse for graf
+    fig, ax = plt.subplots(figsize=(6, 4))
+
+    #Laver selve bar grafen første option er X axen og den anden er Y axen efterfulgt at farvekode.
+    bars = ax.bar(quarter, conversion_rate, color='#364625')
+
+    ax.bar_label(
+        bars,
+        fmt='%.2f%%',
+        padding=3
+    )
+
+    #Sætter titel på grafen samt titel på Y axen
+    ax.set_title('Konvateringsrate Klaviyo 2025', fontsize=14, pad=15)
+    #ax.set_ylabel('Konvateringsrate i %', fontsize=12)
+
+    formatter = ticker.ScalarFormatter(useMathText=True)
+
+    formatter.set_scientific(False)
+
+    ax.yaxis.set_major_formatter(formatter)
+
+    #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
+    plt.xticks(rotation=25, ha='right', fontsize=8)
+    #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
+
+    fig.tight_layout()
+    
+    return fig
+
 def create_revenue_graph():
     
     # Query til at trække data fra SQL (Revenue per Quarter for 2025)
@@ -215,7 +410,7 @@ window.configure(fg_color="#fff8e9")
 # Funktion til markedsføringsknappen
 def marketing_button():
     marketing_window = c.CTkToplevel(window)
-    marketing_window.geometry("1200x700")
+    marketing_window.geometry("1500x900")
     marketing_window.title("Marketing Dashboard")
     marketing_window.configure(fg_color="#fff8e9")
 
@@ -241,10 +436,35 @@ def marketing_button():
     marketing_graf3 = c.CTkFrame(marketing_window, corner_radius=10)
     marketing_graf3.grid(row=1, column=2, padx=20, pady=20, sticky="nsew")
 
+    facebook_graph = create_facebook_graph_cr()
+    google_graph = create_google_graph_cr()
+    Klaviyo_graph = create_klaviyo_graph_cr()
+
+    marketing_canvas1 = FigureCanvasTkAgg(facebook_graph, master = marketing_graf1)
+    marketing_canvas_widget1 = marketing_canvas1.get_tk_widget()
+
+    marketing_canvas2 = FigureCanvasTkAgg(google_graph, master = marketing_graf2)
+    marketing_canvas_widget2 = marketing_canvas2.get_tk_widget()
+
+    marketing_canvas3 = FigureCanvasTkAgg(Klaviyo_graph, master = marketing_graf3)
+    marketing_canvas_widget3 = marketing_canvas3.get_tk_widget()
+
+    marketing_graf1.grid_rowconfigure(0, weight=1)
+    marketing_graf1.grid_columnconfigure(0, weight = 1)
+    marketing_canvas_widget1.grid(row = 0, column = 0, sticky=NSEW)
+
+    marketing_graf2.grid_rowconfigure(0, weight=1)
+    marketing_graf2.grid_columnconfigure(0, weight = 1)
+    marketing_canvas_widget2.grid(row = 0, column = 0, sticky=NSEW)
+
+    marketing_graf3.grid_rowconfigure(0, weight=1)
+    marketing_graf3.grid_columnconfigure(0, weight = 1)
+    marketing_canvas_widget3.grid(row = 0, column = 0, sticky=NSEW)
+
     # Overskrifter til graferne
-    c.CTkLabel(marketing_graf1, text="Facebook").pack(pady=10)
-    c.CTkLabel(marketing_graf2, text="Google").pack(pady=10)
-    c.CTkLabel(marketing_graf3, text="Klaviyo").pack(pady=10)
+    #c.CTkLabel(marketing_graf1, text="Facebook").pack(pady=10)
+    #c.CTkLabel(marketing_graf2, text="Google").pack(pady=10)
+    #c.CTkLabel(marketing_graf3, text="Klaviyo").pack(pady=10)
 
     
 # Laver grid layoutet
@@ -310,12 +530,6 @@ canvas_widget3.grid(row=0, column=0, sticky=NSEW)
 graf4.grid_rowconfigure(0, weight=1)
 graf4.grid_columnconfigure(0, weight=1)
 canvas_widget4.grid(row=0, column=0, sticky=NSEW)
-
-
-# Tekst i de resterende vinduer
-#c.CTkLabel(graf2, text="Mest populære produkt").pack(pady=10)
-#c.CTkLabel(graf3, text="Besøgende").pack(pady=10)
-#c.CTkLabel(graf4, text="Mindst populære produkter").pack(pady=10)
 
 # Knap til at se markedsføring
 marketing_button = c.CTkButton(window, text="Se markedsføring", font=("Arial", 15), command=marketing_button, fg_color="#ff66c4", text_color="black", hover_color="#54ac80") # Laver knappen
