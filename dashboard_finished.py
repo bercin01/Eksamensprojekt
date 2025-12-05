@@ -454,13 +454,14 @@ def dashboard_button():
     def marketing_button():
         marketing_window = c.CTkToplevel(dashboard_window)
         marketing_window.lift() # Gør at vinduet kommer over det andet
-        marketing_window.geometry("1200x700")
+        marketing_window.geometry("1500x900")
         marketing_window.title("Marketing Dashboard")
         marketing_window.configure(fg_color="#fff8e9")
         
         # Laver grid layout til markedsføring dashboardet
         marketing_window.grid_rowconfigure(0, weight=1) # Til overskriften
         marketing_window.grid_rowconfigure(1, weight=10) # Til graferne
+        marketing_window.grid_rowconfigure(2, weight=10) # ande række af graffer
 
         marketing_window.grid_columnconfigure(0, weight=1)
         marketing_window.grid_columnconfigure(1, weight=1)
@@ -479,6 +480,15 @@ def dashboard_button():
 
         marketing_graf3 = c.CTkFrame(marketing_window, corner_radius=10)
         marketing_graf3.grid(row=1, column=2, padx=20, pady=20, sticky="nsew")
+
+        marketing_graf4 = c.CTkFrame(marketing_window, corner_radius=10)
+        marketing_graf4.grid(row=2, column=0, padx=20, pady=20, sticky="nsew")
+
+        marketing_graf5 = c.CTkFrame(marketing_window, corner_radius=10)
+        marketing_graf5.grid(row=2, column=1, padx=20, pady=20, sticky="nsew")
+
+        marketing_graf6 = c.CTkFrame(marketing_window, corner_radius=10)
+        marketing_graf6.grid(row=2, column=2, padx=20, pady=20, sticky="nsew")
 
         facebook_graph = create_facebook_graph_cr()
         google_graph = create_google_graph_cr()
@@ -508,7 +518,7 @@ def dashboard_button():
     title = c.CTkLabel(dashboard_window, text="Performance Dashboard", font=("Times new roman", 32, "bold"), text_color="#4a7c59")
     title.grid(row=0, column=0, columnspan=2 ,pady=20, sticky="n")
 
-        # Vores 4 vinduer til graferne
+    # Vores 4 vinduer til graferne
     graf1 = c.CTkFrame(dashboard_window, corner_radius=10)
     graf1.grid(row=1, column=0, padx=20, pady=20, sticky="nsew")
 
@@ -559,13 +569,7 @@ def dashboard_button():
     graf4.grid_columnconfigure(0, weight=1)
     canvas_widget4.grid(row=0, column=0, sticky=NSEW)
 
-        # Tekst i vinduerne
-    #c.CTkLabel(graf1, text="Omsætning").pack(pady=10)
-    #c.CTkLabel(graf2, text="Mest populære produkt").pack(pady=10)
-    #c.CTkLabel(graf3, text="Besøgende").pack(pady=10)
-    #c.CTkLabel(graf4, text="Mindst populære produkter").pack(pady=10)
-
-        # Knap til at se markedsføring
+    # Knap til at se markedsføring
     marketing_button = c.CTkButton(dashboard_window, text="Se markedsføring", font=("Times new roman", 15), command=marketing_button, fg_color="#ff66c4", text_color="black", hover_color="#54ac80") # Laver knappen
     marketing_button.grid(row=0, column=2, columnspan=2, padx= 30, pady=20) # Placerer den op i Højre hjørne
 
