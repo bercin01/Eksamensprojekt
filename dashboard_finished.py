@@ -61,7 +61,7 @@ def create_facebook_graph_cr():
     ax.bar_label(bars, fmt='%.2f%%')
 
     #Sætter titel på grafen samt titel på Y axen
-    ax.set_title('Konvateringsrate Facebook 2025', fontsize=14, pad=15)
+    ax.set_title('Konveteringsrate Facebook 2025', fontsize=14, pad=15)
 
     #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
     plt.xticks(rotation=25, ha='right', fontsize=8)
@@ -116,7 +116,7 @@ def create_google_graph_cr():
     ax.bar_label(bars, fmt='%.2f%%')
 
     #Sætter titel på grafen samt titel på Y axen
-    ax.set_title('Konvateringsrate Google 2025', fontsize=14, pad=15)
+    ax.set_title('Konveteringsrate Google 2025', fontsize=14, pad=15)
 
     #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
     plt.xticks(rotation=25, ha='right', fontsize=8)
@@ -172,7 +172,7 @@ def create_klaviyo_graph_cr():
     ax.bar_label(bars, fmt='%.2f%%')
 
     #Sætter titel på grafen samt titel på Y axen
-    ax.set_title('Konvateringsrate Klaviyo 2025', fontsize=14, pad=15)
+    ax.set_title('Konveteringsrate Klaviyo 2025', fontsize=14, pad=15)
 
     #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
     plt.xticks(rotation=25, ha='right', fontsize=8)
