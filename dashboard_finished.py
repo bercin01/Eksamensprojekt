@@ -14,98 +14,6 @@ plt.rcParams['font.serif'] = ['Times New Roman']
 # DB file
 DB_FILE = 'database.db'
 
-def create_reach_graph():
-    QUERY = """
-    SELECT 
-        CASE
-                WHEN CAST(substr(Start_Date, 4, 2) AS INTEGER) BETWEEN 1 AND 3 THEN 'Q1'
-                WHEN CAST(substr(Start_Date, 4, 2) AS INTEGER) BETWEEN 4 AND 6 THEN 'Q2'
-                WHEN CAST(substr(Start_Date, 4, 2) AS INTEGER) BETWEEN 7 AND 9 THEN 'Q3'
-                WHEN CAST(substr(Start_Date, 4, 2) AS INTEGER) BETWEEN 10 AND 12 THEN 'Q4'
-            END AS Quarter,
-            SUM("Male_18-24") AS Male_18_24,
-            SUM("Male_25-34") AS Male_25_34,
-            SUM("Male_35-44") AS Male_35_44,
-            SUM("Male_45-54") AS Male_45_54,
-            SUM("Male_55-64") AS Male_55_64,    SUM("Male_65+") AS Male_65,
-            SUM("Female_18-24") AS Female_18_24,
-            SUM("Female_25-34") AS Female_25_34,
-            SUM("Female_35-44") AS Female_35_44,
-            SUM("Female_45-54") AS Female_45_54,
-            SUM("Female_55-64") AS Female_55_64,
-            SUM("Female_65+") AS Female_65
-        FROM
-            meta
-        WHERE
-            substr(Start_Date, 7, 4) = '2025'
-        GROUP BY
-            Quarter
-        ORDER BY
-            Quarter;
-    """
-
-    #SQL forbindelse
-    connection = sqlite3.connect(DB_FILE)
-    cursor = connection.cursor()
-
-    #Kører query og lægge output i variablen data
-    cursor.execute(QUERY)
-    data = cursor.fetchall()
-    connection.close()
-
-    #Trækker data ud af data og lægger det i 2 lister en for produkter og en for omsætning for produktet
-    quarter = [row[0] for row in data]
-    male_18_24 = [row[1] for row in data]
-    male_25_34 = [row[2] for row in data]
-    #male_35_44 = [row[3] for row in data]
-    #male_45_54 = [row[4] for row in data]
-    #male_55_64 = [row[5] for row in data]
-    #male_65 = [row[6] for row in data]
-    #male_18_24 = [row[7] for row in data]
-    #female_18_24 = [row[8] for row in data]
-    #female_25_34 = [row[9] for row in data]
-    #female_35_44 = [row[10] for row in data]
-    #female_45_54 = [row[11] for row in data]
-    #female_55_64 = [row[12] for row in data]
-    #female_65 = [row[13] for row in data]
-
-
-    plt.style.use('seaborn-v0_8-darkgrid')
-
-    #Sætter størrelse for graf
-    fig, ax = plt.subplots(figsize=(6, 4))
-    #Sætter farven på graffens bagground
-    ax.set_facecolor('#e6dfd2')
-    #Sætter farven på rammen
-    fig.patch.set_facecolor('#e6dfd2')
-
-    #Laver selve bar grafen første option er X axen og den anden er Y axen efterfulgt at farvekode.
-    bars = ax.bar(quarter, male_18_24, male_25_34, color='#364625')
-
-    #ax.bar_label(
-    #    bars,
-    #    fmt='%.2f%%',
-    #    padding=3
-    #)
-
-    #Sætter titel på grafen samt titel på Y axen
-    ax.set_title('Meta Reach 2025', fontsize=14, pad=15)
-    #ax.set_ylabel('Konvateringsrate i %', fontsize=12)
-
-    formatter = ticker.ScalarFormatter(useMathText=True)
-
-    formatter.set_scientific(False)
-
-    ax.yaxis.set_major_formatter(formatter)
-
-    #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
-    plt.xticks(rotation=25, ha='right', fontsize=8)
-    #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
-
-    fig.tight_layout()
-    
-    return fig
-
 def create_facebook_graph_cr():
     QUERY = """
     SELECT 
@@ -151,26 +59,14 @@ def create_facebook_graph_cr():
     #Laver selve bar grafen første option er X axen og den anden er Y axen efterfulgt at farvekode.
     bars = ax.bar(quarter, conversion_rate, color='#364625')
 
-    ax.bar_label(
-        bars,
-        fmt='%.2f%%',
-        padding=3
-    )
+    ax.bar_label(bars, fmt='%.2f%%')
 
     #Sætter titel på grafen samt titel på Y axen
     ax.set_title('Konvateringsrate Facebook 2025', fontsize=14, pad=15)
-    #ax.set_ylabel('Konvateringsrate i %', fontsize=12)
-
-    formatter = ticker.ScalarFormatter(useMathText=True)
-
-    formatter.set_scientific(False)
-
-    ax.yaxis.set_major_formatter(formatter)
 
     #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
     plt.xticks(rotation=25, ha='right', fontsize=8)
     #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
-
     fig.tight_layout()
     
     return fig
@@ -220,26 +116,15 @@ def create_google_graph_cr():
     #Laver selve bar grafen første option er X axen og den anden er Y axen efterfulgt at farvekode.
     bars = ax.bar(quarter, conversion_rate, color='#364625')
 
-    ax.bar_label(
-        bars,
-        fmt='%.2f%%',
-        padding=3
-    )
+    ax.bar_label(bars, fmt='%.2f%%')
 
     #Sætter titel på grafen samt titel på Y axen
     ax.set_title('Konvateringsrate Google 2025', fontsize=14, pad=15)
-    #ax.set_ylabel('Konvateringsrate i %', fontsize=12)
-
-    formatter = ticker.ScalarFormatter(useMathText=True)
-
-    formatter.set_scientific(False)
-
-    ax.yaxis.set_major_formatter(formatter)
 
     #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
     plt.xticks(rotation=25, ha='right', fontsize=8)
-    #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
 
+    #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
     fig.tight_layout()
     
     return fig
@@ -289,26 +174,15 @@ def create_klaviyo_graph_cr():
     #Laver selve bar grafen første option er X axen og den anden er Y axen efterfulgt at farvekode.
     bars = ax.bar(quarter, conversion_rate, color='#364625')
 
-    ax.bar_label(
-        bars,
-        fmt='%.2f%%',
-        padding=3
-    )
+    ax.bar_label(bars, fmt='%.2f%%')
 
     #Sætter titel på grafen samt titel på Y axen
     ax.set_title('Konvateringsrate Klaviyo 2025', fontsize=14, pad=15)
-    #ax.set_ylabel('Konvateringsrate i %', fontsize=12)
-
-    formatter = ticker.ScalarFormatter(useMathText=True)
-
-    formatter.set_scientific(False)
-
-    ax.yaxis.set_major_formatter(formatter)
 
     #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
     plt.xticks(rotation=25, ha='right', fontsize=8)
-    #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
 
+    #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
     fig.tight_layout()
     
     return fig
@@ -345,7 +219,7 @@ def create_revenue_graph():
     connection.close()
 
     # Trækker data ud af data og lægger det i 2 lister
-    product_titles = [row[0] for row in data]
+    date_column = [row[0] for row in data]
     net_revenues = [row[1] for row in data]
 
     # Matplotlib plot creation
@@ -359,22 +233,13 @@ def create_revenue_graph():
     fig.patch.set_facecolor('#e6dfd2')
     
     # Laver selve bar grafen
-    bars = ax.bar(product_titles, net_revenues, color='#364625')
+    bars = ax.bar(date_column, net_revenues, color='#364625')
 
-    ax.bar_label(
-        bars,
-        fmt='{:,.0f} Kr',
-        padding=3
-    )
+    ax.bar_label(bars, fmt='{:,.2f} Kr')
     
     # Sætter titel på grafen samt titel på Y axen
     ax.set_title('Omsætning pr kvartal 2025', fontsize=14, pad=15)
     ax.set_ylabel('Nettoomsætning (DKK)', fontsize=10)
-    
-    # Formatter til at vise store tal uden videnskabelig notation (Scientific Notation)
-    formatter = ticker.ScalarFormatter(useMathText=True)
-    formatter.set_scientific(False)
-    ax.yaxis.set_major_formatter(formatter)
     
     # Ændre text på X axen
     plt.xticks(rotation=0, ha='center', fontsize=9)
@@ -414,11 +279,7 @@ def creat_top5_best():
     #Laver selve bar grafen første option er X axen og den anden er Y axen efterfulgt at farvekode.
     bars = ax.bar(product_titles, net_revenues, color='#364625')
 
-    ax.bar_label(
-        bars,
-        fmt='{:,.0f} Kr',
-        padding=3
-    )
+    ax.bar_label(bars, fmt='{:,.0f} Kr')
 
     #Sætter titel på grafen samt titel på Y axen
     ax.set_title('Top 5 Mest Populære Produkter i 2025 (Nettoomsætning)', fontsize=14, pad=15)
@@ -426,6 +287,7 @@ def creat_top5_best():
 
     #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
     plt.xticks(rotation=25, ha='right', fontsize=8)
+
     #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
     fig.tight_layout(pad=1.0)
 
@@ -522,15 +384,12 @@ def create_top5_worst():
     #Laver selve bar grafen første option er X axen og den anden er Y axen efterfulgt at farvekode.
     bars = ax.bar(product_titles, net_revenues, color='#b40c1c')
 
-    ax.bar_label(
-        bars,
-        fmt='{:,.0f} Kr',
-        padding=3
-    )
+    ax.bar_label(bars, fmt='{:,.0f} Kr')
 
     #Sætter titel på grafen samt titel på Y axen
     ax.set_title('Top 5 Mindst Populære Produkter i 2025 (Nettoomsætning)', fontsize=14)
     ax.set_ylabel('Total Nettoomsætning (DKK)', fontsize=12)
+    
     #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
     plt.xticks(rotation=25, ha='right', fontsize=8)
     #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
@@ -591,10 +450,6 @@ def dashboard_button():
         marketing_graf3 = c.CTkFrame(marketing_window, corner_radius=10)
         marketing_graf3.grid(row=1, column=2, padx=20, pady=20, sticky="nsew")
 
-        marketing_graf4 = c.CTkFrame(marketing_window, corner_radius=10)
-        marketing_graf4.grid(row=2, column=0, columnspan=3, padx=20, pady=20, sticky="nsew")
-
-        meta_reach_graph = create_reach_graph()
         facebook_graph = create_facebook_graph_cr()
         google_graph = create_google_graph_cr()
         Klaviyo_graph = create_klaviyo_graph_cr()
@@ -608,9 +463,6 @@ def dashboard_button():
         marketing_canvas3 = FigureCanvasTkAgg(Klaviyo_graph, master = marketing_graf3)
         marketing_canvas_widget3 = marketing_canvas3.get_tk_widget()
 
-        marketing_canvas4 = FigureCanvasTkAgg(meta_reach_graph, master = marketing_graf4)
-        marketing_canvas_widget4 = marketing_canvas4.get_tk_widget()
-
         marketing_graf1.grid_rowconfigure(0, weight=1)
         marketing_graf1.grid_columnconfigure(0, weight = 1)
         marketing_canvas_widget1.grid(row = 0, column = 0, sticky=NSEW)
@@ -622,10 +474,6 @@ def dashboard_button():
         marketing_graf3.grid_rowconfigure(0, weight=1)
         marketing_graf3.grid_columnconfigure(0, weight = 1)
         marketing_canvas_widget3.grid(row = 0, column = 0, sticky=NSEW)
-
-        marketing_graf4.grid_rowconfigure(0, weight=1)
-        marketing_graf4.grid_columnconfigure(0, weight = 1)
-        marketing_canvas_widget4.grid(row = 0, column = 0, sticky=NSEW)
     
     title = c.CTkLabel(dashboard_window, text="Performance Dashboard", font=("Times new roman", 32, "bold"), text_color="#4a7c59")
     title.grid(row=0, column=0, columnspan=2 ,pady=20, sticky="n")
