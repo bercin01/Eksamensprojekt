@@ -8,6 +8,7 @@ from tkinter import *
 import customtkinter as c
 
 #Sætter font i matplotlib til Times New Roman på alle graffer
+plt.style.use('seaborn-v0_8-darkgrid')
 plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.serif'] = ['Times New Roman']
 
@@ -46,8 +47,6 @@ def create_facebook_graph_cr():
     #Trækker data ud af data og lægger det i 2 lister en for produkter og en for omsætning for produktet
     quarter = [row[0] for row in data]
     conversion_rate = [row[1] for row in data]
-
-    plt.style.use('seaborn-v0_8-darkgrid')
 
     #Sætter størrelse for graf
     fig, ax = plt.subplots(figsize=(6, 4))
@@ -104,8 +103,6 @@ def create_google_graph_cr():
     quarter = [row[0] for row in data]
     conversion_rate = [row[1] for row in data]
 
-    plt.style.use('seaborn-v0_8-darkgrid')
-
     #Sætter størrelse for graf
     fig, ax = plt.subplots(figsize=(6, 4))
     #Sætter farven på grefens bagground
@@ -161,8 +158,6 @@ def create_klaviyo_graph_cr():
     #Trækker data ud af data og lægger det i 2 lister en for produkter og en for omsætning for produktet
     quarter = [row[0] for row in data]
     conversion_rate = [row[1] for row in data]
-
-    plt.style.use('seaborn-v0_8-darkgrid')
 
     #Sætter størrelse for graf
     fig, ax = plt.subplots(figsize=(6, 4))
@@ -221,9 +216,6 @@ def create_revenue_graph():
     # Trækker data ud af data og lægger det i 2 lister
     date_column = [row[0] for row in data]
     net_revenues = [row[1] for row in data]
-
-    # Matplotlib plot creation
-    plt.style.use('seaborn-v0_8-darkgrid')
     
     # Sætter størrelse for graf - figsize will be overridden by the Tkinter frame size, but we keep it for good practice
     fig, ax = plt.subplots()
@@ -266,8 +258,6 @@ def creat_top5_best():
     #Trækker data ud af data og lægger det i 2 lister en for produkter og en for omsætning for produktet
     product_titles = [row[0] for row in data]
     net_revenues = [row[1] for row in data]
-
-    plt.style.use('seaborn-v0_8-darkgrid')
 
     #Sætter størrelse for graf
     fig, ax = plt.subplots()
@@ -327,8 +317,7 @@ def create_visitors():
     months = [item[0] for item in processed_data]
     #Definere hvad data der er besøgende
     visitors = [item[1] for item in processed_data]
-    #Tema for matplot
-    #plt.style.use('seaborn-v0_8-darkgrid')
+
     #Størrelse på matplot
     fig = plt.figure(facecolor = '#e6dfd2')
 
@@ -371,8 +360,6 @@ def create_top5_worst():
     product_titles = [row[0] for row in data]
     net_revenues = [row[1] for row in data]
 
-    plt.style.use('seaborn-v0_8-darkgrid')
-
     #Sætter størrelse for graf
     fig, ax = plt.subplots()
     #Sætter farve på baggrund af grafen (Ikke rammen)
@@ -389,7 +376,7 @@ def create_top5_worst():
     #Sætter titel på grafen samt titel på Y axen
     ax.set_title('Top 5 Mindst Populære Produkter i 2025 (Nettoomsætning)', fontsize=14)
     ax.set_ylabel('Total Nettoomsætning (DKK)', fontsize=12)
-    
+
     #Ændre text på X axen bla sætter hældningsgraden hældningsiden samt fontsize
     plt.xticks(rotation=25, ha='right', fontsize=8)
     #Sørger for at grafen og titlerne er indenfor vinduet samt maksimere størrelse på grafen så den fylder mest muligt
