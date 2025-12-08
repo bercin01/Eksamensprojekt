@@ -7,7 +7,7 @@ import matplotlib.dates as mdates
 from tkinter import *
 import customtkinter as c
 
-#Sætter font i matplotlib til Times New Roman på alle graffer
+#Sætter font i matplotlib til Times New Roman på alle graffer samt ændre temaet i graferne.
 plt.style.use('seaborn-v0_8-darkgrid')
 plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.serif'] = ['Times New Roman']
@@ -227,7 +227,7 @@ def create_revenue_graph():
     # Laver selve bar grafen
     bars = ax.bar(date_column, net_revenues, color='#364625')
 
-    ax.bar_label(bars, fmt='{:,.2f} Kr')
+    ax.bar_label(bars, fmt='{:,.0f} Kr')
     
     # Sætter titel på grafen samt titel på Y axen
     ax.set_title('Omsætning pr kvartal 2025', fontsize=14, pad=15)
